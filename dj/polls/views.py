@@ -7,6 +7,7 @@ def index(request):
     context = {
         "title": "Головна сторінка",
         "message": "Ласкаво просимо до Django!",
+        "copyright": "(c) django course 2026 (c) "
     }
     return render(request, "home.html", context)
 
