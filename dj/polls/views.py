@@ -4,5 +4,12 @@ from django.http import HttpResponse
 
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
+    context = {
+        "title": "Головна сторінка",
+        "message": "Ласкаво просимо до Django!",
+    }
+    return render(request, "home.html", context)
 
+
+def how(request):
+    return HttpResponse("Hello! How are you?")
