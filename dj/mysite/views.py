@@ -2,6 +2,7 @@
 from django.shortcuts import render
 
 from django.http import HttpResponse
+from polls.models import BlogPost
 
 def post_detail(request, post_id):
     context = {
@@ -15,3 +16,18 @@ def post_detail(request, post_id):
         "copyright": "(c) django course 2026 "
     }
     return render(request, "home.html", context)
+
+
+def blog_list(request):
+    # 1. Отримуємо дані
+    posts = BlogPost.objects.all()
+    
+    # 2. Готуємо контекст
+    context = {
+        "title": "Мій блог",
+        "posts": posts,
+        "author": "Олександр"
+    }
+    
+    # 3. Передаємо у шаблон
+    return render(request, "blog.html", context)

@@ -1,0 +1,17 @@
+{% extends 'basic.html' %}
+
+{% block title %}Наші блоги{% endblock %}
+
+{% block content %}
+
+<h1>Blog</h1>
+
+{% for post in posts %}
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.content }}</p>
+    <small>{{ post.created_at }}</small>
+{% empty %}
+    <li>Поки дописів немає. Додайте перший!</li>
+{% endfor %}
+
+{% endblock %}
