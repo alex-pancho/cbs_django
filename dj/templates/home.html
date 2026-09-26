@@ -1,12 +1,19 @@
-<!DOCTYPE html>
-<html lang="uk">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ title }}</title>
-</head>
-<body>
+{% extends 'basic.html' %}
+
+{% block title %}Головна сторінка{% endblock %}
+
+
+{% block content %}
+{% if my_user.is_authenticated %}
+  <p>Вітаємо, {{ my_user.username }}!</p>
+{% else %}
+  <p>Будь ласка, увійдіть у систему.</p>
+{% endif %}    
     <div>{{ message }}</div>
-    <h6> {{copyright }}</h6>
     <p>{{ request_data }}</p>
-</body>
-</html>
+    
+{% load static %}
+<div><img src="{% static 'img/2.jpg' %}" alt="Логотип"></div>
+<img src="https://m.media-amazon.com/images/I/61DUb3Fgn+L._AC_UF1000,1000_QL80_.jpg" width="250" height="200">
+
+{% endblock %}
