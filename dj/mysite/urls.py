@@ -23,7 +23,7 @@ urlpatterns = [
     path("", include("polls.urls")),
     # path("polls/", include("polls.urls")),
     path("posts/", views.blog_list, name="blog"),
-    path("users/<str:post_id>/", views.post_detail, name="post_detail"),
+    path("users/<str:post_id>/", views.blog_create, name="post_detail"),
     path("articles/<slug:post_id>/", views.post_detail, name="post_detail"),
 
 ]
