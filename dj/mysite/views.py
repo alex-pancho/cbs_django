@@ -41,3 +41,4 @@ def blog_create(request, post_id):
 
     )
     return render(request, "blog.html", {"post": blogpost})
+

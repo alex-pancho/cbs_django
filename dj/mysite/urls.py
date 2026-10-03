@@ -18,12 +18,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from . import views
+from polls.views import blogpost
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("polls.urls")),
     # path("polls/", include("polls.urls")),
     path("posts/", views.blog_list, name="blog"),
-    path("users/<str:post_id>/", views.blog_create, name="post_detail"),
+    path("posts/<str:post_id>/", blogpost, name="post_detail"),
     path("articles/<slug:post_id>/", views.post_detail, name="post_detail"),
 
 ]

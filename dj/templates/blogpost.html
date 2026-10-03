@@ -1,0 +1,17 @@
+{% extends 'basic.html' %}
+
+{% block title %}Наші блоги{% endblock %}
+
+{% block content %}
+
+<h1>Додайте запис у ваш блог</h1>
+
+<form method="post">
+    {% csrf_token %}
+
+    {{ form }}
+
+    <button type="submit">Зберегти</button>
+</form>
+
+{% endblock %}
