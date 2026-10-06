@@ -2,6 +2,26 @@ from django.shortcuts import render, redirect
 from polls.forms import BlogForm
 from polls.models import BlogPost
 from django.http import HttpResponse
+from django.contrib.auth.forms import UserCreationForm
+
+def register(request):
+
+    if request.method == "POST":
+
+        form = UserCreationForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect("login")
+
+    else:
+        form = UserCreationForm()
+
+    return render(
+        request,
+        "register.html",
+        {"form": form}
+    )
 
 
 def index(request):
@@ -15,7 +35,6 @@ def index(request):
         "copyright": "(c) django course 2026 (c) "
     }
     return render(request, "home.html", context)
-
 
 def blogpost(request, post_id=0):
     if post_id:
@@ -37,7 +56,8 @@ def blogpost(request, post_id=0):
         else:
             form = BlogForm(initial={
                 "title": post.title,
-                "content": post.content
+                "content": post.content,
+                "user": request.user
             })
     else:
         form = BlogForm(request.POST)
