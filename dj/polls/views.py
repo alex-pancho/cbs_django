@@ -1,8 +1,17 @@
 from django.shortcuts import render, redirect
 from polls.forms import BlogForm
 from polls.models import BlogPost
+from polls.serializers import BlogPostSerializer
+
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import get_object_or_404
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import generics
+from rest_framework import viewsets
+
 
 def register(request):
 
@@ -35,6 +44,7 @@ def index(request):
         "copyright": "(c) django course 2026 (c) "
     }
     return render(request, "home.html", context)
+
 
 def blogpost(request, post_id=0):
     if post_id:
@@ -77,3 +87,16 @@ def blogpost(request, post_id=0):
         "blogpost.html",
         {"form": form}
     )
+
+# class PostListCreate(generics.ListCreateAPIView):
+#     queryset = BlogPost.objects.all()
+#     serializer_class = BlogPostSerializer
+
+
+# class PostDetail(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = BlogPost.objects.all()
+#     serializer_class = BlogPostSerializer
+
+class PostViewSet(viewsets.ModelViewSet):
+    queryset = BlogPost.objects.all()
+    serializer_class = BlogPostSerializer
