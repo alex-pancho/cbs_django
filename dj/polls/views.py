@@ -6,11 +6,11 @@ from polls.serializers import BlogPostSerializer
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import get_object_or_404
+from rest_framework import permissions, viewsets
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import generics
-from rest_framework import viewsets
 
 
 def register(request):
@@ -100,3 +100,4 @@ def blogpost(request, post_id=0):
 class PostViewSet(viewsets.ModelViewSet):
     queryset = BlogPost.objects.all()
     serializer_class = BlogPostSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]

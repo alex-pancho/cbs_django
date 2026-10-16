@@ -1,9 +1,14 @@
+from rest_framework import permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import BlogPost
 from .serializers import BlogPostSerializer
 
+
+
 class PostList(APIView):
+
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def get(self, request):
 
@@ -27,3 +32,9 @@ class PostList(APIView):
             serializer.save()
 
             return Response(serializer.data)
+
+
+        return Response(
+            serializer.errors,
+            status=status.HTTP_400_BAD_REQUEST
+        )
